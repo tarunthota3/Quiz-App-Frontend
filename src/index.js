@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import './index.css';
 import App from './App';
+import Login from './login/login.js';
+import Register from './register/register.js';
 import Qanda from './questionAnswer/questionAnswer.js';
 import CorrectAnswers from './questionAnswer/correctAnswer/correctAnswer.js';
 import AdminHomePage from './adminHomePage/adminHomePage.js';
@@ -11,6 +13,8 @@ import AdminHomePage from './adminHomePage/adminHomePage.js';
 ReactDOM.render(
   <Router>
     <div>
+      <Route exact path='/login' component={Login} />
+      <Route exact path='/register' component={Register} />
       <Route exact path='/' component={App} />
       <Route path='/qanda' component={Qanda} />
       <Route path='/adminHomePage' component={AdminHomePage} />
