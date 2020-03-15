@@ -13,9 +13,9 @@ import AdminHomePage from './adminHomePage/adminHomePage.js';
 ReactDOM.render(
   <Router>
     <div>
-      <Route exact path='/login' component={Login} />
+      <Route exact path='/' component={Login} />
       <Route exact path='/register' component={Register} />
-      <Route exact path='/' component={App} />
+      <Route exact path='/homePage' component={App} />
       <Route path='/qanda' component={Qanda} />
       <Route path='/adminHomePage' component={AdminHomePage} />
       <Route path='/correctAnswers' component={CorrectAnswers} />
