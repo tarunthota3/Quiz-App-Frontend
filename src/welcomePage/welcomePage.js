@@ -49,15 +49,6 @@ export default class WelcomePage extends Component {
         icon={null}
         onChange = {this.dropdownChange}
       />
-
-      <div className="greetingText">
-        <span>Welcome to Quiz App</span>
-      </div>
-
-      <div className="infoText">
-        <span className="line1"> Scroll down to play </span>
-      </div>
-
     </div>);
     }
     return(

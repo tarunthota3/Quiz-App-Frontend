@@ -4,7 +4,7 @@ import { SectionsContainer, Section} from 'react-fullpage';
 
 import WelcomePage from '../welcomePage/welcomePage.js';
 import Heroes from '../heroes/heroes.js';
-
+import Category from '../category/category.js';
 export default class FullPage extends Component {
   render(){
 
@@ -23,7 +23,8 @@ export default class FullPage extends Component {
       <div>
         <SectionsContainer {...options}>
           <Section><WelcomePage /></Section>
-          <Section><Heroes /></Section>
+          {/* <Section><Heroes /></Section> */}
+          <Section><Category /></Section>
         </SectionsContainer>
       </div>
     );

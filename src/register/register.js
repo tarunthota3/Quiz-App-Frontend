@@ -141,7 +141,7 @@ export default class Register extends Component {
             type='password'
             value={this.state.password}
             onChange={this.passwordChange} />
-          <Button primary fluid size='large' onClick={this.registerClick}>
+          <Button color='teal' fluid size='large' onClick={this.registerClick}>
             Register
           </Button>
           <Header as="h4">

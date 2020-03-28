@@ -1,0 +1,58 @@
+.outerContainer {
+    height: 99.5vh;
+    background-image: url('../assets/images/bg\ -\ part\ 2\ \(first\ ee\ bg\ pettu\).png');
+    background-position: center;
+    background-size: cover;
+  }
+  
+  .categoryContainer {
+    margin-top: 8%;
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
+  }
+  
+  .characters {
+    height:180px;
+    display: block;
+    margin: 20px auto;
+    animation: heroes 5s linear infinite;
+    align-content: center;
+  }
+  
+  .categoryContainer h6{
+    text-align: center;
+    font-family: 'Charm', cursive;
+    color: #fff;
+    font-size: 30px;
+    margin: 10px 0px;
+    padding: 0px;
+  }
+  
+  .outerContainer h1 {
+    margin: 0px;
+    padding: 0px;
+    text-align: center;
+    color: #fff;
+    position: relative;
+    font-family: 'Charm', cursive;
+    font-size: 42px;
+    letter-spacing: 2px;
+     padding-top: 3%;
+     background: linear-gradient(white 78%, #F8CD96 27%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .outerContainer h1:hover {
+    /* color: black; */
+   
+  }
+  .runBulb {
+    /* cursor: pointer; */
+    
+  }
+  
+  .bulb {
+    width: 40px;
+    height: 55px;
+  }

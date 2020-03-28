@@ -133,7 +133,7 @@ export default class Login extends Component {
           />
           <Header as="h5" textAlign = "right" style={{textDecoration: "underline"}}>Forgot Password</Header>
 
-          <Button primary fluid size='large' onClick={this.loginClick}>
+          <Button color='teal' fluid size='large' onClick={this.loginClick}>
             Login
           </Button>
         <Header as="h4">

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Modal, Image, Header, Button } from 'semantic-ui-react';
 import {Link} from 'react-router-dom';
 
-import './heroes.css'
+// import './heroes.css'
 
 export default class Heroes extends Component {
   constructor() {
