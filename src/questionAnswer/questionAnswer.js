@@ -33,8 +33,11 @@ export default class QuestionAnswer extends Component {
      this.checkCorrectAnswers = this.checkCorrectAnswers.bind(this);
    }
    componentDidMount(){
+     console.log("componentdidmount:::: ", localStorage.categoryName);
+     
     timeInterval = setInterval(() => this.timer(),1000);
     request.get(serverURL + "/qb/quest")
+    .query({ categoryName:localStorage.categoryName })
 	.end((err, res) => {
 		console.log("response",res);
 		if(err) {
@@ -66,7 +69,7 @@ export default class QuestionAnswer extends Component {
      }
    }
    finalSubmit() {
-     window.open(clientURL,"_self");
+     window.open(clientURL+"/homePage","_self");
      window.close();
    }
    optionClick(questionId,value,item){
@@ -127,7 +130,7 @@ export default class QuestionAnswer extends Component {
      this.setState({allQuestions:temp});
    }
    cancelClick(){
-    window.open(clientURL,"_self");
+    window.open(clientURL+"/homePage","_self");
     window.close();
    }
    submitClick(){
@@ -164,14 +167,15 @@ export default class QuestionAnswer extends Component {
     else{
       smiley_face = "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/SMirC-medium.svg/1024px-SMirC-medium.svg.png";
     }
-    console.log("localStorage",localStorage.heroUrl);
+    console.log("localStorage",localStorage);
     return(
-      <div className="customStyle" style={{overflow:'hidden'}}>
+      <div className="customStyle1" style={{overflow:'hidden'}}>
         {/* <SnowStorm /> */}
+
         <Header as='h2' block style={{position:'fixed',width:'100%',zIndex:'1'}}>
-          <Image size='large' src={localStorage.heroUrl} style={{float:'left'}}/>
+    <Header as="h3" style={{paddingTop:"0.5%",float:'left'}}>{localStorage.name}</Header>
           <center>
-            Quanta
+            Quiz
           </center>
           <span style={{marginTop:"-2%", float: 'right', color:"red"}} >
             {this.state.timer}

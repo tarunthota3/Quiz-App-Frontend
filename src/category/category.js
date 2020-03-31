@@ -9,7 +9,10 @@ import Politics from "../assets/images/politics.png";
 
 
 
+
 import './category.css'
+const clientURL = require('../config/dev.js').clientURL;
+const serverURL = require('../config/dev.js').serverURL;
 
 export default class Category extends Component {
   constructor() {
@@ -18,46 +21,44 @@ export default class Category extends Component {
       
       selectedCategory: '',
       selectedCategoryUrl: '',
-      modalOpen: false
+      modalOpen: false,
+      imageUrl:[
+        { image:  Entertainment, name:'entertainment'},
+        { image:  Politics, name:'politics'},
+        { image:  Riddles, name:'riddles'},
+        { image:  Sports, name:'sports'},
+        { image:  Technology, name:'technology'}
+      ]
     };
+    this.letsPlayClick = this.letsPlayClick.bind(this);
   }
 
-  one(i) {
-    let image = document.getElementById("myImage1");
-    let hero = document.getElementById("hero1");
-    setTimeout(() => {
-      // eslint-disable-next-line
-        if(i>10 && (parseFloat(Math.random() % 11).toFixed(1) == 0.7)) {
-            this.stop(image, hero);
-        } else {
-          console.log('i - > ', i);
-          i = i+1;
-        }
-    }, 200);
+  categoryClick(key) {
+    let imageUrl = this.state.imageUrl;
+    this.setState({modalOpen:true, selectedCategory:imageUrl[key].name});
+    
+  }
+  letsPlayClick(){
+    localStorage.setItem("categoryName",this.state.selectedCategory);
+    window.open(clientURL+"/qanda","_self");
   }
 
   render() {
 
-    const imageUrl = [
-      { image:  Entertainment, name:'Entertainment'},
-      { image:  Politics, name:'Politics'},
-      { image:  Riddles, name:'Riddles'},
-      { image:  Sports, name:'Sports'},
-      { image:  Technology, name:'Technology'}
-    ];
+    const { imageUrl, selectedCategory } = this.state;
 
     const greetings = ['Hey', 'Hi', 'Hello'];
     console.log("image 0: ", imageUrl[0].image);
     
     return(
       <div className="outerContainer">
-        <h1 className="runBulb" onClick={() => this.one(1)}>Category Selection</h1>
+        <h1 className="runBulb" >Category Selection</h1>
         <div className="categoryContainer">
           {
-            imageUrl.map((item,i) => ( <div>
+            imageUrl.map((item,i) => ( <div class="i1" onClick={this.categoryClick.bind(this, i)}>
                                         <img src={item.image} alt={item.name} className="characters" />
                                         <center>
-                                          <span style={{color:'white',fontSize: '26px', letterSpacing:'2px'}}>{item.name}</span>
+                                          <span style={{color:'white',fontSize: '26px', letterSpacing:'2px'}}>{item.name.charAt(0).toUpperCase() + item.name.slice(1)}</span>
                                         </center>
                                         
                                       </div>))
@@ -66,10 +67,9 @@ export default class Category extends Component {
         
         <Modal dimmer="inverted" open={this.state.modalOpen} onClose={() => {this.setState({modalOpen: false})}}>
           <Modal.Content image>
-            <Image wrapped size='medium' src={this.state.selectedCategoryUrl} alt={this.state.selectedCategory} style={{height:"400px"}} />
             <Modal.Description>
               <Header as='h1'>
-                {greetings[Math.floor(Math.random() * greetings.length)]}, I am {this.state.selectedCategory}!
+        {greetings[Math.floor(Math.random() * greetings.length)]} {window.localStorage.name}, You have selected {selectedCategory.charAt(0).toUpperCase() + selectedCategory.slice(1)}!
               </Header>
               <div style={{fontSize: "16px"}}>
                 <p> I have got some interesting questions to ask. </p>
@@ -87,8 +87,7 @@ export default class Category extends Component {
               icon='checkmark'
               labelPosition='right'
               content="Yep, let's play"
-              as ={Link}
-              to="/qanda"
+              onClick={this.letsPlayClick}
             />
           </Modal.Actions>
         </Modal>

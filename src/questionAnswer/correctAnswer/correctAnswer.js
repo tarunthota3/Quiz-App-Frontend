@@ -102,9 +102,10 @@ export default class QuestionAnswer extends Component {
   render(){
     console.log("localStorage",localStorage);
     return(
-      <div className="customStyle" style={{overflow:'hidden'}}>
+      <div className="customStyle1" style={{overflow:'hidden'}}>
         {/* <SnowStsorm /> */}
         <Header as='h2' block style={{position:'fixed',width:'100%',zIndex:'1'}}>
+        <Header as="h3" style={{paddingTop:"0.5%",float:'left'}}>{localStorage.name}</Header>
           <Image size='large' src={localStorage.heroUrl} style={{float:'left'}}/>
           <center>
             Quanta
@@ -171,7 +172,7 @@ export default class QuestionAnswer extends Component {
               <Grid>
                 <Grid.Row>
                   <Grid.Column width={8}>
-                    <Segment raised className='options' >
+                    <Segment raised >
                       <Grid>
                         <Grid.Column width={1} style={{backgroundColor:item.selectedAnswer[0]}}/>
                         <Grid.Column width={14}>
@@ -181,7 +182,7 @@ export default class QuestionAnswer extends Component {
                     </Segment>
                   </Grid.Column>
                   <Grid.Column width={8}>
-                    <Segment raised className='options' >
+                    <Segment raised >
                       <Grid>
                         <Grid.Column width={1} style={{backgroundColor:item.selectedAnswer[1]}}/>
                         <Grid.Column width={14}>
@@ -193,7 +194,7 @@ export default class QuestionAnswer extends Component {
                 </Grid.Row>
                 <Grid.Row style={{marginTop:'-1%'}}>
                   <Grid.Column width={8}>
-                    <Segment raised className='options' >
+                    <Segment raised >
                       <Grid>
                         <Grid.Column width={1} style={{backgroundColor:item.selectedAnswer[2]}}/>
                         <Grid.Column width={14}>
@@ -203,7 +204,7 @@ export default class QuestionAnswer extends Component {
                     </Segment>
                   </Grid.Column>
                   <Grid.Column width={8}>
-                    <Segment raised className='options' >
+                    <Segment raised >
                       <Grid>
                         <Grid.Column width={1} style={{backgroundColor:item.selectedAnswer[3]}}/>
                         <Grid.Column width={14}>
