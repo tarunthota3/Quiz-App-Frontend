@@ -12,12 +12,15 @@ import {
   Header,
   Image,
   Input,
-  Checkbox
+  Checkbox,
+  Tab
 } from 'semantic-ui-react';
 import { ToastContainer } from "react-toastr";
 import EditQuestion from "./editQuestion/editQuestion.js";
 import DeleteQuestion from "./deleteQuestion/deleteQuestion.js";
 const serverURL = require('../config/dev.js').serverURL;
+
+
 let container;
 
 export default class AllQuestions extends Component {
@@ -184,6 +187,7 @@ export default class AllQuestions extends Component {
         }
         else{
           let questions = JSON.parse(res.body);
+          // console.log("all questions: ", questions);
           this.setState({questions:questions,dimmerActive:false});
         }
       });
@@ -422,6 +426,132 @@ export default class AllQuestions extends Component {
   }
   render(){
     // console.log("state -> ",this.state);
+    const panes = []
+    let allquestions = this.state.questions;
+    allquestions.map((item1, key1)=>{
+      let tempObject = {
+        menuItem: item1.name.charAt(0).toUpperCase() + item1.name.slice(1),
+        render: () =>
+          <Tab.Pane>
+            <Accordion fluid styled style={{marginBottom:'1%'}}>
+          {item1.data.length !== 0?
+            item1.data.map((item,key)=>{
+              // console.log("item: ",item);
+              let backgroundColor1 = 'white';
+              let color1 = 'black';
+              let backgroundColor2 = 'white';
+              let color2 = 'black';
+              let backgroundColor3 = 'white';
+              let color3 = 'black';
+              let backgroundColor4 = 'white';
+              let color4 = 'black';
+
+
+              if(item.op1 === item.ans){
+                backgroundColor1 = 'green';
+                color1 = 'white';
+              }
+              else if(item.op2 === item.ans){
+                backgroundColor2 = 'green'
+                color2 = 'white';
+              }
+              else if(item.op3 === item.ans){
+                backgroundColor3 = 'green'
+                color3 = 'white';
+              }
+              else if(item.op4 === item.ans){
+                backgroundColor4 = 'green'
+                color4 = 'white';
+              }
+              return(
+                <div key={key}>
+                  <Checkbox checked ={this.state.multipleIdstoDelete.includes(item._id)} onChange={this.checkBoxChange.bind(this,item)} style={{float:'left',padding:this.state.paddingCheckBox,visibility:this.state.visibilityCheckBox}} />
+                  <span>
+                  <Accordion.Title active={this.state.activeIndex === key} index={key} onClick={this.handleClick}>
+                    <Icon name='dropdown' />
+                      {item.question}
+                  </Accordion.Title>
+                  <Accordion.Content active={this.state.activeIndex === key}>
+                    <Grid>
+
+                      {item.image_url.length !== 0?
+                        <Grid.Row>
+                          <Grid.Column width={2}/>
+                          <Grid.Column width={11}>
+                            <Image src={item.image_url} size='small' />
+                          </Grid.Column>
+                          <Grid.Column width={3}/>
+                        </Grid.Row>
+                        :
+                        ""
+                      }
+                      {item.audio_url.length !== 0?
+                        <Grid.Row>
+                          <Grid.Column width={2}/>
+                          <Grid.Column width={11}>
+                            <audio controls id={item.audio_url}>
+                              <source src={item.audio_url} type="audio/mpeg"/>
+                              Your browser does not support the audio element.
+                            </audio>
+                          </Grid.Column>
+                          <Grid.Column width={3}/>
+                        </Grid.Row>
+                        :
+                        ""
+                      }
+                      <Grid.Row>
+                        <Grid.Column width={1}></Grid.Column>
+                        <Grid.Column width={6}>
+                          <Segment raised style={{backgroundColor:backgroundColor1,color:color1}} size='large'>
+                            A. {item.op1}
+                          </Segment>
+                        </Grid.Column>
+                        <Grid.Column width={6}>
+                          <Segment raised style={{backgroundColor:backgroundColor2,color:color2}} size='large'>
+                            B. {item.op2}
+                          </Segment>
+                        </Grid.Column>
+                        <Grid.Column width={3}></Grid.Column>
+                      </Grid.Row>
+                      <Grid.Row>
+                        <Grid.Column width={1}></Grid.Column>
+                        <Grid.Column width={6}>
+                          <Segment raised style={{backgroundColor:backgroundColor3,color:color3}} size='large'>
+                            C. {item.op3}
+                          </Segment>
+                        </Grid.Column>
+                        <Grid.Column width={6}>
+                          <Segment raised style={{backgroundColor:backgroundColor4,color:color4}} size='large'>
+                            D. {item.op4}
+                          </Segment>
+                        </Grid.Column>
+                        <Grid.Column width={3} style={{textAlign:'right',marginTop:'1.5%'}}>
+                          <Button.Group >
+                            <Button primary onClick = {this.editClick.bind(this,item)}>Edit</Button>
+                            <Button.Or />
+                            <Button color='red' onClick = {this.deleteClick.bind(this,item)}>Delete</Button>
+                          </Button.Group>
+                        </Grid.Column>
+                      </Grid.Row>
+                    </Grid>
+                  </Accordion.Content>
+                  </span>
+                </div>
+              )
+            })
+            :
+            <div style={{textAlign:'center',paddingTop:'1%',paddingBottom:'1%',fontWeight:'bold'}}>No Questions Found</div>
+          }
+        </Accordion>
+          </Tab.Pane>
+        
+
+      }
+
+     panes.push(tempObject); 
+    })
+
+
     return(
       <div>
         <ToastContainer className="customToastr toast-top-right"
@@ -439,7 +569,7 @@ export default class AllQuestions extends Component {
         <Dimmer style={{position:'fixed'}} active={this.state.updateDimmerActive}>
           <Loader>Updating</Loader>
         </Dimmer>
-        <Grid>
+        {/* <Grid>
           <Grid.Row>
             <Grid.Column width={9}/>
             <Grid.Column width={3} style={{textAlign:'right',paddingTop:'1%',paddingRight:'0%'}}>
@@ -460,8 +590,9 @@ export default class AllQuestions extends Component {
             </Grid.Column>
           </Grid.Row>
 
-        </Grid>
-        <Accordion fluid styled style={{marginBottom:'1%'}}>
+        </Grid> */}
+        <Tab menu={{ pointing: true }} panes={panes} />
+        {/* <Accordion fluid styled style={{marginBottom:'1%'}}>
           {this.state.questions.length !== 0?
             this.state.questions.map((item,key)=>{
               // console.log("item: ",item);
@@ -570,7 +701,7 @@ export default class AllQuestions extends Component {
             :
             <div style={{textAlign:'center',paddingTop:'1%',paddingBottom:'1%',fontWeight:'bold'}}>No Questions Found</div>
           }
-        </Accordion>
+        </Accordion> */}
         <DeleteQuestion deleteModalOpen={this.state.deleteModalOpen}
            closeDeleteModal={this.closeDeleteModal} deleteQuestionData={this.state.deleteQuestionData}
           deleteQuestion={this.deleteQuestion}  />

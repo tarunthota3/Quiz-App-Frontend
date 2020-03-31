@@ -10,6 +10,7 @@ import './bulkUpload.css';
 import { CSVLink } from "react-csv";
 let headers = [
   { label: "question", key: "question" },
+  { label: "category", key: "category" },
   { label: "op1", key: "op1" },
   { label: "op2", key: "op2" },
   { label: "op3", key: "op3" },
@@ -19,8 +20,8 @@ let headers = [
   { label: "ans", key: "ans" }
 ];
 let data = [
-  { question: "What is the value of 1+3?", op1: "2", op2:"3", op3:"4", op4:"5", ans:"4", image_url:"", audio_url:"" },
-  { question: "What is the value of 1+4?", op1: "4", op2:"5", op3:"6", op4:"7", ans:"5", image_url:"", audio_url:"" }
+  { question: "What is the value of 1+3?", category:"entertainment", op1: "2", op2:"3", op3:"4", op4:"5", ans:"4", image_url:"", audio_url:"" },
+  { question: "What is the value of 1+4?", category:"entertainment", op1: "4", op2:"5", op3:"6", op4:"7", ans:"5", image_url:"", audio_url:"" }
 ];
 
 

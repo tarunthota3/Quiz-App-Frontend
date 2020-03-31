@@ -22,6 +22,14 @@ export default class NewQuestion extends Component {
     super(props);
     this.state = {
       question:'',
+      category:'',
+      categoryOptions: [
+        { key: 'Entertainment', value: 'Entertainment', text: 'Entertainment' },
+        { key: 'Politics', value: 'Politics', text: 'Politics' },
+        { key: 'Riddles', value: 'Riddles', text: 'Riddles' },
+        { key: 'Sports', value: 'Sports', text: 'Sports' },
+        { key: 'Technology', value: 'Technology', text: 'Technology' },
+      ],
       op1: '',
       op2: '',
       op3: '',
@@ -40,6 +48,7 @@ export default class NewQuestion extends Component {
       dimmerActive:false
     };
     this.questionChange = this.questionChange.bind(this);
+    this.categoryChange = this.categoryChange.bind(this);
     this.op1Change = this.op1Change.bind(this);
     this.op2Change = this.op2Change.bind(this);
     this.op3Change = this.op3Change.bind(this);
@@ -121,6 +130,9 @@ export default class NewQuestion extends Component {
   correctansChange(e,a){
     this.setState({correctans:a.value});
   }
+  categoryChange(e,a){
+    this.setState({category:a.value.toLowerCase()});
+  }
   radioButtonChange(value){
     this.setState({radioButtonValue:value},()=>{
       if(this.state.radioButtonValue === 'none'){
@@ -166,6 +178,7 @@ export default class NewQuestion extends Component {
       this.setState({dimmerActive:true},()=>{
         let data = {
           question : this.state.question,
+          category: this.state.category,
           image_url : this.state.image_url,
           audio_url : this.state.audio_url,
           op1 : this.state.op1,
@@ -268,6 +281,24 @@ export default class NewQuestion extends Component {
             {/* <Grid.Column width={2}></Grid.Column> */}
           </Grid.Row>
           <Grid.Row>
+          <Grid.Column width={2}/>
+            <Grid.Column width={4}>
+              <Header as="h5" style={{marginTop:"3%"}}>Please Select the Category</Header>
+            </Grid.Column>
+            <Grid.Column width={4}>
+            <Dropdown
+              placeholder='Select Category'
+              fluid
+              search
+              selection
+              value = {this.state.category}
+              options = {this.state.categoryOptions}
+              onChange = {this.categoryChange}
+            />
+            </Grid.Column>
+            <Grid.Column width={6}/>
+          </Grid.Row>
+          <Grid.Row>
             <Grid.Column width={2}/>
             <Grid.Column width={4}>
               <Header as="h5">Please Select the Option  (Optional)</Header>
@@ -354,7 +385,7 @@ export default class NewQuestion extends Component {
                 <Button primary onClick={this.handleBulkUploadModalOpen}>Bulk Upload</Button>
                 <Button.Or />
                 <Button primary
-                  disabled={ this.state.question.length === 0 || this.state.op1.length === 0 || this.state.op2.length === 0 ||
+                  disabled={ this.state.question.length === 0 || this.state.category.length === 0 || this.state.op1.length === 0 || this.state.op2.length === 0 ||
                              this.state.op3.length === 0 || this.state.op4.length === 0 || this.state.correctans.length === 0 }
                             onClick = {this.submitChange}>
                   Submit
