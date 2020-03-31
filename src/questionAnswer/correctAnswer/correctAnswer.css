@@ -1,4 +1,6 @@
-.customStyle{
+.customStyle2{
   font-family: 'Comfortaa', cursive !important;
-  background: #125e84;
+  background-image: url('../../assets/images/bg\ -\ part\ 2\ \(first\ ee\ bg\ pettu\).png');
+  background-position: center;
+  background-size: cover;
 }

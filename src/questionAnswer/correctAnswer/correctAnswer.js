@@ -102,7 +102,7 @@ export default class QuestionAnswer extends Component {
   render(){
     console.log("localStorage",localStorage);
     return(
-      <div className="customStyle1" style={{overflow:'hidden'}}>
+      <div className="customStyle2" style={{overflow:'hidden'}}>
         {/* <SnowStsorm /> */}
         <Header as='h2' block style={{position:'fixed',width:'100%',zIndex:'1'}}>
         <Header as="h3" style={{paddingTop:"0.5%",float:'left'}}>{localStorage.name}</Header>
