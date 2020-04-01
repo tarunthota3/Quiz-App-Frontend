@@ -131,7 +131,7 @@ export default class NewQuestion extends Component {
     this.setState({correctans:a.value});
   }
   categoryChange(e,a){
-    this.setState({category:a.value.toLowerCase()});
+    this.setState({category:a.value});
   }
   radioButtonChange(value){
     this.setState({radioButtonValue:value},()=>{
@@ -178,7 +178,7 @@ export default class NewQuestion extends Component {
       this.setState({dimmerActive:true},()=>{
         let data = {
           question : this.state.question,
-          category: this.state.category,
+          category: this.state.category.toLowerCase(),
           image_url : this.state.image_url,
           audio_url : this.state.audio_url,
           op1 : this.state.op1,
@@ -222,9 +222,13 @@ export default class NewQuestion extends Component {
   handleBulkUploadModalClose(){
     this.setState({bulkUploadModalOpen:false});
   }
-  uploadData(data){
+  uploadData(data, category){
+    let categorydata = {
+      category:category
+    };
     this.setState({dimmerActive:true,bulkUploadModalOpen:false},()=>{
       let req = request.post(serverURL + "/qb/question/bulkUpload")
+                        .field("categoryData", category.toLowerCase())
       data.forEach(file => {
         req.attach('csvFile', file);
       });

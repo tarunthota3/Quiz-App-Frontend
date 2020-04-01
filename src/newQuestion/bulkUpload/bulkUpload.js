@@ -4,13 +4,13 @@ import {
   Button,
   Grid,
   Header,
-  Input
+  Input,
+  Dropdown
 } from 'semantic-ui-react';
 import './bulkUpload.css';
 import { CSVLink } from "react-csv";
 let headers = [
   { label: "question", key: "question" },
-  { label: "category", key: "category" },
   { label: "op1", key: "op1" },
   { label: "op2", key: "op2" },
   { label: "op3", key: "op3" },
@@ -31,12 +31,26 @@ export default class BulkUpload extends Component {
     this.state = {
       fileAdded: false,
       file:[],
+      category:'',
+      categoryOptions: [
+        { key: 'Entertainment', value: 'Entertainment', text: 'Entertainment' },
+        { key: 'Politics', value: 'Politics', text: 'Politics' },
+        { key: 'Riddles', value: 'Riddles', text: 'Riddles' },
+        { key: 'Sports', value: 'Sports', text: 'Sports' },
+        { key: 'Technology', value: 'Technology', text: 'Technology' },
+      ]
     }
+    this.categoryChange = this.categoryChange.bind(this);
     this.fileChange = this.fileChange.bind(this);
     this.uploadClick = this.uploadClick.bind(this);
   }
+  categoryChange(e,a){
+    console.log("category change");
+    
+    this.setState({category:a.value});
+  }
   uploadClick(){
-    this.props.uploadData(this.state.file);
+    this.props.uploadData(this.state.file, this.state.category);
   }
   fileChange(selectorFiles: FileList)
   {
@@ -54,8 +68,25 @@ export default class BulkUpload extends Component {
             <Modal.Header>Upload multiple Questions</Modal.Header>
             <Modal.Content>
               <Grid>
+              <Grid.Row>
+            <Grid.Column width={4}>
+              <Header as="h5" style={{marginTop:"3%"}}>Please Select the Category</Header>
+            </Grid.Column>
+            <Grid.Column width={6}>
+            <Dropdown
+              placeholder='Select Category'
+              fluid
+              search
+              selection
+              value = {this.state.category}
+              options = {this.state.categoryOptions}
+              onChange = {this.categoryChange}
+            />
+            </Grid.Column>
+            <Grid.Column width={6}/>
+          </Grid.Row>
                 <Grid.Row>
-                  <Grid.Column width={3} style={{paddingTop:'2%'}}>
+                  <Grid.Column width={4} style={{paddingTop:'2%'}}>
                     <Header as="h4">
                       Upload the CSV File
                     </Header>
@@ -63,7 +94,7 @@ export default class BulkUpload extends Component {
                   <Grid.Column width={6}>
                       <Input type='file' accept=".csv"  onChange={ (e) => this.fileChange(e.target.files)}/>
                   </Grid.Column>
-                  <Grid.Column width={7} style={{textAlign:'right',paddingTop:'2%'}}>
+                  <Grid.Column width={6} style={{textAlign:'right',paddingTop:'2%'}}>
                     <Header as="h5">
                       Need to download a sample CSV File? &nbsp;
                       <CSVLink data={data} headers={headers} filename={"bulk_upload_sample.csv"}>

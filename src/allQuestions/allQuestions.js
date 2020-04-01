@@ -41,6 +41,8 @@ export default class AllQuestions extends Component {
       },
       editQuestionData:{
         question:"",
+        category: "",
+        key: 0,
         image_url:"",
         audio_url:"",
         op1:"",
@@ -262,8 +264,9 @@ export default class AllQuestions extends Component {
     let context = this;
     this.setState({updateDimmerActive:true,editModalOpen:false},()=>{
       let data = {
-        id:this.state.editQuestionData._id,
         question:this.state.editQuestionData.question,
+        category: this.state.editQuestionData.category,
+        key: this.state.editQuestionData.key,
         op1:this.state.editQuestionData.op1,
         op2:this.state.editQuestionData.op2,
         op3:this.state.editQuestionData.op3,
@@ -271,27 +274,27 @@ export default class AllQuestions extends Component {
         ans:this.state.editQuestionData.ans
       }
       console.log("data: ",data);
-      request.put(serverURL + "/qb/question")
-        .send(data)
-        .end((err, res) => {
-          if(err) {
-            alert('Error in updating quest data -> ', err);
-          }
-          else{
-            context.setState({updateDimmerActive:false},()=>{
-              container.success(
-                `Question updated successfully`, ``, {
-                  timeOut: 2500,
-                  extendedTimeOut: 10000,
-                  allowHtml: true,
-                  closeButton: true,
-                });
-                setTimeout(function(){
-                  window.location.reload();
-                },3500);
-            });
-          }
-        });
+      // request.put(serverURL + "/qb/question")
+      //   .send(data)
+      //   .end((err, res) => {
+      //     if(err) {
+      //       alert('Error in updating quest data -> ', err);
+      //     }
+      //     else{
+      //       context.setState({updateDimmerActive:false},()=>{
+      //         container.success(
+      //           `Question updated successfully`, ``, {
+      //             timeOut: 2500,
+      //             extendedTimeOut: 10000,
+      //             allowHtml: true,
+      //             closeButton: true,
+      //           });
+      //           setTimeout(function(){
+      //             window.location.reload();
+      //           },3500);
+      //       });
+      //     }
+      //   });
     });
 
   }
@@ -308,9 +311,13 @@ export default class AllQuestions extends Component {
     }
     this.setState({editModalOpen:false,editQuestionData:defaultEditData});
   }
-  editClick(data){
-    // console.log("edit clicked: ",data);
-    // console.log("questions state: ",this.state.questions);
+  editClick(categoryName, data, key){
+    console.log("categoryName: ", categoryName);
+    console.log("edit clicked: ",data);
+    console.log("key: ", key);
+    data.category = categoryName;
+    data.key=key;
+
     let correctAnswer = [];
     correctAnswer.push({key:data.op1,text:data.op1,value:data.op1})
     correctAnswer.push({key:data.op2,text:data.op2,value:data.op2})
@@ -527,7 +534,7 @@ export default class AllQuestions extends Component {
                         </Grid.Column>
                         <Grid.Column width={3} style={{textAlign:'right',marginTop:'1.5%'}}>
                           <Button.Group >
-                            <Button primary onClick = {this.editClick.bind(this,item)}>Edit</Button>
+                            <Button primary onClick = {this.editClick.bind(this,item1.name,item, key)}>Edit</Button>
                             <Button.Or />
                             <Button color='red' onClick = {this.deleteClick.bind(this,item)}>Delete</Button>
                           </Button.Group>
