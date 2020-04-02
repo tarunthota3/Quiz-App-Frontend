@@ -194,7 +194,7 @@ export default class AllQuestions extends Component {
         }
       });
   }
-  deleteClick(data){
+  deleteClick(categoryName, data, key){
     console.log("delete modal clicked ",data);
     // data.backgroundColor1 = 'white';
     // data.color1 = 'black';
@@ -204,6 +204,9 @@ export default class AllQuestions extends Component {
     // data.color3 = 'black';
     // data.backgroundColor4 = 'white';
     // data.color4 = 'black';
+    data.category = categoryName;
+    data.key=key;
+
     if(data.op1 === data.ans) {
       console.log("1st");
       data.backgroundColor1 = 'green';
@@ -234,7 +237,10 @@ export default class AllQuestions extends Component {
     let context = this;
     this.setState({deleteDimmerActive:true,deleteModalOpen:false},()=>{
       request.del(serverURL + "/qb/question")
-                 .query({id:this.state.deleteQuestionData._id})
+                  .query({
+                    category: this.state.deleteQuestionData.category.toLowerCase(),
+                    key: this.state.deleteQuestionData.key
+                  })
                  .end((err, res) => {
                    if(err) {
                      console.log("err: ",err);
@@ -265,7 +271,7 @@ export default class AllQuestions extends Component {
     this.setState({updateDimmerActive:true,editModalOpen:false},()=>{
       let data = {
         question:this.state.editQuestionData.question,
-        category: this.state.editQuestionData.category,
+        category: this.state.editQuestionData.category.toLowerCase(),
         key: this.state.editQuestionData.key,
         op1:this.state.editQuestionData.op1,
         op2:this.state.editQuestionData.op2,
@@ -274,27 +280,27 @@ export default class AllQuestions extends Component {
         ans:this.state.editQuestionData.ans
       }
       console.log("data: ",data);
-      // request.put(serverURL + "/qb/question")
-      //   .send(data)
-      //   .end((err, res) => {
-      //     if(err) {
-      //       alert('Error in updating quest data -> ', err);
-      //     }
-      //     else{
-      //       context.setState({updateDimmerActive:false},()=>{
-      //         container.success(
-      //           `Question updated successfully`, ``, {
-      //             timeOut: 2500,
-      //             extendedTimeOut: 10000,
-      //             allowHtml: true,
-      //             closeButton: true,
-      //           });
-      //           setTimeout(function(){
-      //             window.location.reload();
-      //           },3500);
-      //       });
-      //     }
-      //   });
+      request.put(serverURL + "/qb/question")
+        .send(data)
+        .end((err, res) => {
+          if(err) {
+            alert('Error in updating quest data -> ', err);
+          }
+          else{
+            context.setState({updateDimmerActive:false},()=>{
+              container.success(
+                `Question updated successfully`, ``, {
+                  timeOut: 2500,
+                  extendedTimeOut: 10000,
+                  allowHtml: true,
+                  closeButton: true,
+                });
+                setTimeout(function(){
+                  window.location.reload();
+                },3500);
+            });
+          }
+        });
     });
 
   }
@@ -536,7 +542,7 @@ export default class AllQuestions extends Component {
                           <Button.Group >
                             <Button primary onClick = {this.editClick.bind(this,item1.name,item, key)}>Edit</Button>
                             <Button.Or />
-                            <Button color='red' onClick = {this.deleteClick.bind(this,item)}>Delete</Button>
+                            <Button color='red' onClick = {this.deleteClick.bind(this,item1.name,item, key)}>Delete</Button>
                           </Button.Group>
                         </Grid.Column>
                       </Grid.Row>

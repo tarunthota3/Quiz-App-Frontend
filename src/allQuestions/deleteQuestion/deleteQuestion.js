@@ -23,7 +23,10 @@ export default class DeleteQuestion extends Component {
     let context = this;
     this.setState({deleteDimmerActive:true,deleteModalOpen:false},()=>{
       request.del(serverURL + "/qb/question")
-                 .query({id:this.state.deleteQuestionData._id})
+                 .query({
+                    category: this.state.editQuestionData.category.toLowerCase(),
+                    key: this.state.editQuestionData.key
+                  })
                  .end((err, res) => {
                    if(err) {
                      console.log("err: ",err);
