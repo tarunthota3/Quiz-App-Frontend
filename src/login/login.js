@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Button,  Header, Grid, Form, Segment, Dimmer, Loader} from 'semantic-ui-react';
+import {Button,  Header, Grid, Form, Dimmer, Loader} from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import './login.css';
 import { ToastContainer } from "react-toastr";

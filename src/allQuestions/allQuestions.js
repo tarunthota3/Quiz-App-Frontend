@@ -439,6 +439,7 @@ export default class AllQuestions extends Component {
     // console.log("state -> ",this.state);
     const panes = []
     let allquestions = this.state.questions;
+    // eslint-disable-next-line
     allquestions.map((item1, key1)=>{
       let tempObject = {
         menuItem: item1.name.charAt(0).toUpperCase() + item1.name.slice(1),
