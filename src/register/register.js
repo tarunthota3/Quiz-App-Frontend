@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Button, Modal, Image, Header, Grid, Form, Segment, Dimmer, Loader} from 'semantic-ui-react';
+import {Button, Header, Grid, Form, Segment, Dimmer, Loader} from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import './register.css';
 import { ToastContainer } from "react-toastr";
@@ -44,7 +44,7 @@ export default class Register extends Component {
       let email = this.state.email;
       let password = this.state.password;
 
-      if(firsName.length == 0 || lastName.length == 0 || email.length == 0 || password.length == 0) {
+      if(firsName.length === 0 || lastName.length === 0 || email.length === 0 || password.length === 0) {
         container.error(
           `Fields can't be empty`, ``, {
             timeOut: 1500,
@@ -112,9 +112,9 @@ export default class Register extends Component {
       <div className="registerBackground"></div>
       <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
     <Grid.Column style={{ maxWidth: 500 }}>
-    <Header as='h3' style={{letterSpacing:"2px",textDecoration:"underline", color:"white"}}>Create an account</Header>
+    <Header as='h2' style={{letterSpacing:"2px", color:"teal"}}>Create an account</Header>
       <Form size='large'>
-        <Segment stacked>
+        {/* <Segment stacked> */}
         <Form.Input
             style={{marginTop:"2%"}}
             fluid 
@@ -145,9 +145,9 @@ export default class Register extends Component {
             Register
           </Button>
           <Header as="h4">
-          Already have an account? <Link to="/" style={{textDecoration:"underline"}}>Sign In</Link>  
+          Already have an account? <Link to="/" >Sign In</Link>  
         </Header>
-        </Segment>
+        {/* </Segment> */}
       </Form>
       
     </Grid.Column>

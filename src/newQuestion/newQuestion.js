@@ -223,9 +223,9 @@ export default class NewQuestion extends Component {
     this.setState({bulkUploadModalOpen:false});
   }
   uploadData(data, category){
-    let categorydata = {
-      category:category
-    };
+    // let categorydata = {
+    //   category:category
+    // };
     this.setState({dimmerActive:true,bulkUploadModalOpen:false},()=>{
       let req = request.post(serverURL + "/qb/question/bulkUpload")
                         .field("categoryData", category.toLowerCase())

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Button, Modal, Image, Header, Grid, Form, Segment, Message, Dimmer, Loader} from 'semantic-ui-react';
+import {Button,  Header, Grid, Form, Segment, Dimmer, Loader} from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import './login.css';
 import { ToastContainer } from "react-toastr";
@@ -31,7 +31,7 @@ export default class Login extends Component {
     loginClick(){
       let email = this.state.email;
       let password = this.state.password;
-      if(email.length == 0 || password.length == 0){
+      if(email.length === 0 || password.length === 0){
         container.error(
           `Fields can't be empty`, ``, {
             timeOut: 1500,
@@ -54,7 +54,7 @@ export default class Login extends Component {
               }
               else{
                 console.log("response: ",res);
-                if(res.body != "User details not found"){
+                if(res.body !== "User details not found"){
                   
                   this.setState({dimmerActive:false},()=>{
                     container.success(
@@ -108,9 +108,9 @@ export default class Login extends Component {
       <div className="loginBackground"></div>
       <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
     <Grid.Column style={{ maxWidth: 500 }}>
-    <Header as='h3' style={{letterSpacing:"2px",textDecoration:"underline", color:"white"}}>User Login</Header>
+    <Header as='h2' style={{letterSpacing:"2px", color:"teal"}}>Login</Header>
       <Form size='large'>
-        <Segment stacked>
+        {/* <Segment stacked> */}
           
           <Form.Input
             style={{marginTop:"2%"}}
@@ -131,15 +131,15 @@ export default class Login extends Component {
             value={this.state.password}
             onChange={this.passwordChange}
           />
-          <Header as="h5" textAlign = "right" style={{textDecoration: "underline"}}>Forgot Password</Header>
+          <Header as="h5" textAlign = "right">Forgot Password</Header>
 
           <Button color='teal' fluid size='large' onClick={this.loginClick}>
             Login
           </Button>
         <Header as="h4">
-          New to us? <Link to="/register" style={{textDecoration:'underline'}}>Sign Up</Link>  
+          New to us? <Link to="/register">Sign Up</Link>  
         </Header>
-        </Segment>
+        {/* </Segment> */}
       </Form>
       
     </Grid.Column>

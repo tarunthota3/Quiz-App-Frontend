@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import SnowStorm from 'react-snowstorm';
+// import SnowStorm from 'react-snowstorm';
 import {
   Button,
   Grid,

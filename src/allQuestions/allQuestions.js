@@ -9,9 +9,7 @@ import {
   Button,
   Dimmer,
   Loader,
-  Header,
   Image,
-  Input,
   Checkbox,
   Tab
 } from 'semantic-ui-react';

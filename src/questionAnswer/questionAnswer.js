@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import SnowStorm from 'react-snowstorm';
+// import SnowStorm from 'react-snowstorm';
 import {
   Button,
   Grid,
@@ -167,6 +167,7 @@ export default class QuestionAnswer extends Component {
     else{
       smiley_face = "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/SMirC-medium.svg/1024px-SMirC-medium.svg.png";
     }
+
     console.log("localStorage",localStorage);
     return(
       <div className="customStyle1" style={{overflow:'hidden'}}>
@@ -297,15 +298,25 @@ export default class QuestionAnswer extends Component {
         <Grid.Column width={2}/>
       </Grid.Row>
     </Grid>
-    <Modal dimmer='blurring' open={this.state.modalOpen} basic size='tiny'>
-      <Header as="h2" icon='gift' content='Congratulations !!!' />
+    <Modal dimmer='blurring' open={this.state.modalOpen} size='tiny'>
+    <Modal.Header icon='gift'>Quiz Results</Modal.Header>
+    <Modal.Content image>
+      <Image wrapped size='tiny' src={smiley_face} />
+      <Modal.Description style={{marginLeft: '5%',marginTop: '3%'}}>
+        <Header>You got {this.state.totalScore} correct out of 5</Header>
+        <p>
+        Do you want to check your answers? <span onClick={this.checkCorrectAnswers} style={{textDecoration:'underline',cursor:'pointer'}}>Click Here</span>
+        </p>
+      </Modal.Description>
+    </Modal.Content>
+      {/* <Header as="h2" icon='gift' content='Congratulations !!!' />
       <Modal.Content style={{textAlign:'center'}}>
           <Header as="h3" style={{color:'white'}}>
             You got {this.state.totalScore} correct out of 5 &nbsp;&nbsp;<Image src={smiley_face} size='large' />
             <br/>
             Do you want to check your answers? <span onClick={this.checkCorrectAnswers} style={{textDecoration:'underline',cursor:'pointer'}}>Click Here</span>
         </Header>
-      </Modal.Content>
+      </Modal.Content> */}
       <Modal.Actions>
         <Button color='green' onClick={this.finalSubmit}>
           Close

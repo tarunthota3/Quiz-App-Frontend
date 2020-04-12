@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Modal, Image, Header, Button, Card, Segment, Grid, Icon } from 'semantic-ui-react';
-import {Link} from 'react-router-dom';
+import { Modal, Header, Button } from 'semantic-ui-react';
+// import {Link} from 'react-router-dom';
 import Entertainment from "../assets/images/Entertainment.png";
 import Sports from "../assets/images/Sports.png";
 import Riddles from "../assets/images/Riddles.png";
@@ -12,7 +12,7 @@ import Politics from "../assets/images/politics.png";
 
 import './category.css'
 const clientURL = require('../config/dev.js').clientURL;
-const serverURL = require('../config/dev.js').serverURL;
+// const serverURL = require('../config/dev.js').serverURL;
 
 export default class Category extends Component {
   constructor() {

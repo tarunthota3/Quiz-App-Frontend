@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Dropdown, Image } from 'semantic-ui-react';
-import SnowStorm from 'react-snowstorm';
+// import SnowStorm from 'react-snowstorm';
 import './welcomePage.css'
 import userIcon from "../assets/images/user2.png";
+import downwardIcon from "../assets/images/download.png";
 import { clientURL } from '../config/dev';
 const options = [
   { key: 'user', text: 'Account', icon: 'user', value:"user" },
@@ -36,11 +37,6 @@ export default class WelcomePage extends Component {
     }
     else{
       data = (<div className="homePage">
-      {/* <SnowStorm /> */}
-
-      {/* <div className="gameName">
-          <img className="santa" alt="" src="http://pngimg.com/uploads/santa_claus/santa_claus_PNG38463.png" />
-      </div> */}
       <Dropdown 
         style={{position:"absolute",right:"1%",top:"2%"}}
         trigger={trigger}
@@ -49,6 +45,10 @@ export default class WelcomePage extends Component {
         icon={null}
         onChange = {this.dropdownChange}
       />
+      <Image
+        style={{position:"absolute",bottom:"51%", left:"50%"}}
+        src={downwardIcon}
+        size="mini"/>
     </div>);
     }
     return(
