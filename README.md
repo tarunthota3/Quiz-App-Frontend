@@ -1,4 +1,5 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Pre-requisites
+Bakend Application - [Quiz Platform BackEnd](https://github.com/tarunthota3/Quiz-App-Backend).
 
 ## Available Scripts
 
